@@ -441,6 +441,7 @@ class MainWindow(object):
         '''
             Opens up the peep editor window.
         '''
+        s.BB.isPlaying = False
         peepCreatorUI.peepCreatorUI(s.peepListRef, s.BB)
 
     def swapPeeps(s, peepNo):

@@ -8,16 +8,11 @@
 
 import Peep.peep
 from MainWindow import MainWindow
-from MainMenu import MainMenu
 import Blackboard
 
 class Handler():
     ''' class that handles the main gameplay loop '''
     def __init__(self):
-        # initialise the main menu
-        
-        self.mainMenu = MainMenu()
-
         # initialises the game
         self.blackboard = Blackboard.Blackboard()
         self.a = [Peep.peep.Peep(self.blackboard)]

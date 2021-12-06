@@ -37,9 +37,6 @@
     <Compile Include="Peep\Job.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainMenu.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="MainWindow.py">
       <SubType>Code</SubType>
     </Compile>
