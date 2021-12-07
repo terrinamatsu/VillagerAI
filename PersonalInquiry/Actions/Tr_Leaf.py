@@ -17,17 +17,26 @@ class Tr_Leaf(Tr_Tree):
 
 
     def Call(s):
-        print(s.name)
-        if s.isRunning == 1:
+        
+
+        # Check if leaf is continuing, setup tick if not.
+        if abs(s.isRunning) == 1:
             s.isRunning = 0
             s.currentTicks = s.ticks
 
+        # Decrement Ticks
         s.currentTicks-=1
+        
+        print(s.name + str(s.currentTicks))
+
+        # Tick
         if s.currentTicks >= 0:
             s.pBoard.currentLeaf = s
             s.isRunning = 0
             s.action()
-            print(s.name)
+            #print(s.name)
         elif s.currentTicks == -1:
             s.isRunning = 1
+
+        # Return
         return s.isRunning

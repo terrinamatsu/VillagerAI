@@ -5,6 +5,8 @@ import Actions.Tree
 class Blackboard(object):
     """ The Blackboard that contains all world objects and information
         to be used by each peep and action. 
+
+        Handles the timer, and the calling of each object every tick.
         
         Also all the peeps currently available to socialise. """
 
@@ -33,7 +35,9 @@ class Blackboard(object):
         #assert isinstance(peep, peep.Peep)
         s.peeps.append(peep)
 
+
     def tick(s):
+        print("\n\n")
         s.time += 1
         if s.time == 1440:
             s.time=0

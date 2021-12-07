@@ -1,5 +1,5 @@
 """
-    Village NPC AI Version 0.0.11
+    Village NPC AI Version 1.0.1
 
     07 May 2020 ; 27 July 2020
 
@@ -10,18 +10,12 @@ import Peep.peep
 from MainWindow import MainWindow
 import Blackboard
 
-class Handler():
-    ''' class that handles the main gameplay loop '''
-    def __init__(self):
-        # initialises the game
-        self.blackboard = Blackboard.Blackboard()
-        self.a = [Peep.peep.Peep(self.blackboard)]
-        self.blackboard.initRndPeeps(20)
-        self.a = self.blackboard.peeps
-
-        self.main = MainWindow(self.a, self.blackboard)
 
 ''' main program '''
 if __name__=="__main__":
     # start game
-    main = Handler()
+    blackboard = Blackboard.Blackboard()
+    a = [Peep.peep.Peep(blackboard)]
+    blackboard.initRndPeeps(2)
+
+    main = MainWindow(blackboard)

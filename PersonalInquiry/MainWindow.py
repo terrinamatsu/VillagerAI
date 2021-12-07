@@ -17,7 +17,7 @@ class MainWindow(object):
        as well as the option to select other peeps to display from the peeplist."""
     
 
-    def __init__(s, peepList : [Peep], blackboard : Blackboard.Blackboard):
+    def __init__(s, blackboard : Blackboard.Blackboard):
         s.BB = blackboard
         s.peepListRef = s.BB.peeps
 
@@ -36,19 +36,19 @@ class MainWindow(object):
         s.MainPeep_Detail_Frame.rowconfigure(0, weight=1)
         s.MainPeep_Detail_Frame.columnconfigure(0, weight=1)
                 # Name
-        s.MP_name_Label = Label(s.MainPeep_Detail_Frame, text=(peepList[0].name + " " + peepList[0].surname))
+        s.MP_name_Label = Label(s.MainPeep_Detail_Frame, text=(s.peepListRef[0].name + " " + s.peepListRef[0].surname))
         s.MP_name_Label.grid(row=0, column=0, sticky="W", padx=5)
                 # Age
-        s.MP_age_Label = Label(s.MainPeep_Detail_Frame, text=str(peepList[0].age))
+        s.MP_age_Label = Label(s.MainPeep_Detail_Frame, text=str(s.peepListRef[0].age))
         s.MP_age_Label.grid(row=0, column=1, sticky="W", padx=5)
                 # Personality Type
-        s.MP_personality_Label = Label(s.MainPeep_Detail_Frame, text=peepList[0].personalityString())
+        s.MP_personality_Label = Label(s.MainPeep_Detail_Frame, text=s.peepListRef[0].personalityString())
         s.MP_personality_Label.grid(row=0, column=2, sticky="W", padx=5)
                 # Job
-        s.MP_job_Label = Label(s.MainPeep_Detail_Frame, text=St.jobs.inverse[peepList[0].job])
+        s.MP_job_Label = Label(s.MainPeep_Detail_Frame, text=St.jobs.inverse[s.peepListRef[0].job])
         s.MP_job_Label.grid(row=0, column=3, sticky="W", padx=5)
                 # Current Action
-        s.MP_action_Label = Label(s.MainPeep_Detail_Frame, text=peepList[0].currentAction.data.name, width=20)
+        s.MP_action_Label = Label(s.MainPeep_Detail_Frame, text=s.peepListRef[0].currentAction.data.name, width=20)
         s.MP_action_Label.grid(row=0, column=4, sticky="W", padx=10)
                 # Current Time
         s.MP_Time_Label = Label(s.MainPeep_Detail_Frame, text=str(int(s.BB.time/60)) + ":" + str(s.BB.time%60), width=20)
@@ -63,7 +63,7 @@ class MainWindow(object):
         s.MainPeep_Needs_Frame.columnconfigure(0, weight=1)
                 # Need Values, Icon, Progress Bars
                     # Hunger
-        s.MainPeep_nHunger_Label = Label(s.MainPeep_Needs_Frame, text="Hunger: " + str(peepList[0].currentHunger.data.value),width=15)
+        s.MainPeep_nHunger_Label = Label(s.MainPeep_Needs_Frame, text="Hunger: " + str(s.peepListRef[0].currentHunger.data.value),width=15)
         s.MainPeep_nHunger_Label.grid(row=0, column=0, columnspan=2, sticky="W", padx=5)
 
         hungerIcon0 = ImageTk.PhotoImage(Image.open("food_need.png"))
@@ -73,7 +73,7 @@ class MainWindow(object):
         s.MP_nHunger_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nHunger_PBar.grid(row=1, column=1, sticky="WE", padx=5)
                     # Thirst
-        s.MainPeep_nThirst_Label = Label(s.MainPeep_Needs_Frame, text="Thirst: " + str(peepList[0].currentThirst.data.value),width=15)
+        s.MainPeep_nThirst_Label = Label(s.MainPeep_Needs_Frame, text="Thirst: " + str(s.peepListRef[0].currentThirst.data.value),width=15)
         s.MainPeep_nThirst_Label.grid(row=0, column=2, columnspan=2, sticky="W", padx=5)
 
         thirstIcon0 = ImageTk.PhotoImage(Image.open("thirst_need.png"))
@@ -83,7 +83,7 @@ class MainWindow(object):
         s.MP_nThirst_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nThirst_PBar.grid(row=1, column=3, sticky="WE", padx=5)
                     # Fatigue
-        s.MainPeep_nFatigue_Label = Label(s.MainPeep_Needs_Frame, text="Fatigue: " + str(peepList[0].currentFatigue.data.value),width=15)
+        s.MainPeep_nFatigue_Label = Label(s.MainPeep_Needs_Frame, text="Fatigue: " + str(s.peepListRef[0].currentFatigue.data.value),width=15)
         s.MainPeep_nFatigue_Label.grid(row=0, column=4, columnspan=2, sticky="W", padx=5)
 
         fatigueIcon0 = ImageTk.PhotoImage(Image.open("sleep_need.png"))
@@ -93,7 +93,7 @@ class MainWindow(object):
         s.MP_nFatigue_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nFatigue_PBar.grid(row=1, column=5, sticky="WE", padx=5)
                     # Social
-        s.MainPeep_nSocial_Label = Label(s.MainPeep_Needs_Frame, text="Social: " + str(peepList[0].currentSocial.data.value),width=15)
+        s.MainPeep_nSocial_Label = Label(s.MainPeep_Needs_Frame, text="Social: " + str(s.peepListRef[0].currentSocial.data.value),width=15)
         s.MainPeep_nSocial_Label.grid(row=0, column=6, columnspan=2, sticky="W", padx=5)
 
         socialIcon0 = ImageTk.PhotoImage(Image.open("social_need.png"))
@@ -103,7 +103,7 @@ class MainWindow(object):
         s.MP_nSocial_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nSocial_PBar.grid(row=1, column=7, sticky="WE", padx=5)
                     # Hygiene
-        s.MainPeep_nHygiene_Label = Label(s.MainPeep_Needs_Frame, text="Hygiene: " + str(peepList[0].currentHygiene.data.value),width=15)
+        s.MainPeep_nHygiene_Label = Label(s.MainPeep_Needs_Frame, text="Hygiene: " + str(s.peepListRef[0].currentHygiene.data.value),width=15)
         s.MainPeep_nHygiene_Label.grid(row=0, column=8, columnspan=2, sticky="W", padx=5)
 
         hygieneIcon0 = ImageTk.PhotoImage(Image.open("hygienebSolid_need.png"))
@@ -113,7 +113,7 @@ class MainWindow(object):
         s.MP_nHygiene_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nHygiene_PBar.grid(row=1, column=9, sticky="WE", padx=5)
                     # Bladder
-        s.MainPeep_nBladder_Label = Label(s.MainPeep_Needs_Frame, text="Bladder: " + str(peepList[0].currentBladderLiquid.data.value),width=15)
+        s.MainPeep_nBladder_Label = Label(s.MainPeep_Needs_Frame, text="Bladder: " + str(s.peepListRef[0].currentBladderLiquid.data.value),width=15)
         s.MainPeep_nBladder_Label.grid(row=0, column=10, columnspan=2, sticky="W", padx=5)
 
         bladderIcon0 = ImageTk.PhotoImage(Image.open("bLiquid_need.png"))
@@ -123,7 +123,7 @@ class MainWindow(object):
         s.MP_nBladder_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nBladder_PBar.grid(row=1, column=11, sticky="WE", padx=5)
                     # Solids
-        s.MainPeep_nSolids_Label = Label(s.MainPeep_Needs_Frame, text="Solids: " + str(peepList[0].currentBladderSolid.data.value),width=15)
+        s.MainPeep_nSolids_Label = Label(s.MainPeep_Needs_Frame, text="Solids: " + str(s.peepListRef[0].currentBladderSolid.data.value),width=15)
         s.MainPeep_nSolids_Label.grid(row=0, column=12, columnspan=2, sticky="W", padx=5)
 
         solidsIcon0 = ImageTk.PhotoImage(Image.open("bSolid_need.png"))
@@ -133,7 +133,7 @@ class MainWindow(object):
         s.MP_nSolids_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nSolids_PBar.grid(row=1, column=13, sticky="WE", padx=5)
                     # Fun
-        s.MainPeep_nFun_Label = Label(s.MainPeep_Needs_Frame, text="Fun: " + str(peepList[0].currentFun.data.value),width=15)
+        s.MainPeep_nFun_Label = Label(s.MainPeep_Needs_Frame, text="Fun: " + str(s.peepListRef[0].currentFun.data.value),width=15)
         s.MainPeep_nFun_Label.grid(row=0, column=14, columnspan=2, sticky="W", padx=5)
 
         funIcon0 = ImageTk.PhotoImage(Image.open("fun_need.png"))
@@ -143,7 +143,7 @@ class MainWindow(object):
         s.MP_nFun_PBar = ttk.Progressbar(s.MainPeep_Needs_Frame, orient=HORIZONTAL, mode='determinate')
         s.MP_nFun_PBar.grid(row=1, column=15, sticky="WE", padx=5)
                     # Fulfillment
-        s.MainPeep_nFulfillment_Label = Label(s.MainPeep_Needs_Frame, text="Fulfillment: " + str(peepList[0].currentFulfillment.data.value),width=15)
+        s.MainPeep_nFulfillment_Label = Label(s.MainPeep_Needs_Frame, text="Fulfillment: " + str(s.peepListRef[0].currentFulfillment.data.value),width=15)
         s.MainPeep_nFulfillment_Label.grid(row=0, column=16, columnspan=2, sticky="W", padx=5)
 
         fulfillmentIcon0 = ImageTk.PhotoImage(Image.open("fulfillment_need.png"))
@@ -162,7 +162,7 @@ class MainWindow(object):
 
         s.MainPeep_Traits_Labels = [Label()]
         for i in range(1, St.TraitNo + 1):
-            if peepList[0].traits[i] == 1:
+            if s.peepListRef[0].traits[i] == 1:
                 s.MainPeep_Traits_Labels.append(Label(s.MainPeep_Traits_Frame, text=St.traits.inverse[i], width=15))
                 s.MainPeep_Traits_Labels[i].grid(row=int((i-1)/10) , column=((i-1)%10))
             else:
@@ -176,7 +176,7 @@ class MainWindow(object):
 
         s.MainPeep_Skills_Labels = [Label()]
         for i in range(1, St.SkillNo + 1):
-            text = St.skills.inverse[i] + "  " + str(peepList[0].skills[i].lvl)
+            text = St.skills.inverse[i] + "  " + str(s.peepListRef[0].skills[i].lvl)
             s.MainPeep_Skills_Labels.append(Label(s.MainPeep_Skills_Frame, text=text, width=15))
             s.MainPeep_Skills_Labels[i].grid(row=int((i-1)/10) , column=((i-1)%10))
             # Knowledge Frame
@@ -187,7 +187,7 @@ class MainWindow(object):
 
         s.MainPeep_Knowledge_Labels = [Label()]
         for i in range(1, St.KnowledgeNo + 1):
-            text = St.knowledges.inverse[i] + "  " + str(peepList[0].knowledge[i].lvl)
+            text = St.knowledges.inverse[i] + "  " + str(s.peepListRef[0].knowledge[i].lvl)
             s.MainPeep_Knowledge_Labels.append(Label(s.MainPeep_Knowledge_Frame, text=text, width=15))
             s.MainPeep_Knowledge_Labels[i].grid(row=int((i-1)/10) , column=((i-1)%10))
             # Interests Frame
@@ -198,7 +198,7 @@ class MainWindow(object):
 
         s.MainPeep_Interests_Labels = [Label()]
         for i in range(1, St.InterestNo + 1):
-            text = St.interests.inverse[i] + "  " + str(peepList[0].interest[i].lvl)
+            text = St.interests.inverse[i] + "  " + str(s.peepListRef[0].interest[i].lvl)
             s.MainPeep_Interests_Labels.append(Label(s.MainPeep_Interests_Frame, text=text, width=15))
             s.MainPeep_Interests_Labels[i].grid(row=int((i-1)/10) , column=((i-1)%10))
 
@@ -224,34 +224,9 @@ class MainWindow(object):
         funIcon = [[ImageTk.PhotoImage]]
         fulfillmentIcon = [[ImageTk.PhotoImage]]
 
-        for i in range(1,  len(peepList)):
-            s.PeepWindows.append(LabelFrame(s.OtherPeep_Frame, text=peepList[i].name))
+        for i in range(1,  len(s.peepListRef)):
+            s.PeepWindows.append(LabelFrame(s.OtherPeep_Frame, text=s.peepListRef[i].name))
             s.PeepWindows[i].grid(row=int((i-1)/10), column=((i-1)%10))
-
-            ''' Text Labels
-            Labels = [Label(s.PeepWindows[i], text=peepList[i].currentHunger, width=10)]
-            Labels[0].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentThirst.data.value, width=10))
-            Labels[1].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentFatigue.data.value, width=10))
-            Labels[2].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentSocial.data.value, width=10))
-            Labels[3].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentHygiene.data.value, width=10))
-            Labels[4].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentBladderLiquid.data.value, width=10))
-            Labels[5].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentBladderSolid.data.value, width=10))
-            Labels[6].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentFun.data.value, width=10))
-            Labels[7].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentFulfillment.data.value, width=10))
-            Labels[8].pack()
-            Labels.append(Label(s.PeepWindows[i], text=peepList[i].currentAction.data.name))
-            Labels[9].pack()
-
-            s.PeepWindowsLabels.append(Labels)
-            '''
 
             # Icon & Progress Bars
 
@@ -311,7 +286,7 @@ class MainWindow(object):
 
 
             # Action Label
-            Labels = [(Label(s.PeepWindows[i], text=peepList[i].currentAction.data.name))]
+            Labels = [(Label(s.PeepWindows[i], text=s.peepListRef[i].currentAction.data.name))]
             Labels[0].grid(row=9, column=0, columnspan = 2)
 
             s.PeepWindowsLabels.append(Labels)
@@ -362,6 +337,7 @@ class MainWindow(object):
         s.MP_action_Label.configure(text=s.peepListRef[0].currentAction.data.name)
         s.MP_Time_Label.configure(text=str(int(s.BB.time/60)) + ":" + str(s.BB.time%60))
         s.MP_Date_Label.config(text=(St.weekdays.inv[s.BB.day%7]) + " " + (St.months.inv[int(s.BB.day/7)]) + " " + str(s.BB.year))
+        
         # Needs
         s.MainPeep_nHunger_Label.configure(text="Hunger: " + str(s.peepListRef[0].currentHunger.data.value))
         s.MainPeep_nThirst_Label.configure(text="Thirst: " + str(s.peepListRef[0].currentThirst.data.value))
@@ -372,7 +348,6 @@ class MainWindow(object):
         s.MainPeep_nSolids_Label.configure(text="Solids: " + str(s.peepListRef[0].currentBladderSolid.data.value))
         s.MainPeep_nFun_Label.configure(text="Fun: " + str(s.peepListRef[0].currentFun.data.value))
         s.MainPeep_nFulfillment_Label.configure(text="Fulfillment: " + str(s.peepListRef[0].currentFulfillment.data.value))
-        
         # Need Progress Bars
         s.MP_nHunger_PBar['value'] = (70000 - s.peepListRef[0].currentHunger.data.value) / 700.0
         s.MP_nThirst_PBar['value'] = (70000 - s.peepListRef[0].currentThirst.data.value) / 700.0
@@ -403,24 +378,10 @@ class MainWindow(object):
             text = St.interests.inverse[i] + "  " + str(s.peepListRef[0].interest[i].lvl)
             s.MainPeep_Interests_Labels[i].configure(text=text)
 
-        # Other Char Frames
-        
-        for i in range(1,  len(s.peepListRef)):
-            
-            s.PeepWindows[i].configure(text=s.peepListRef[i].name)
 
-            '''
-            s.PeepWindowsLabels[i][0].configure(text=s.peepListRef[i].currentHunger.data.value)
-            s.PeepWindowsLabels[i][1].configure(text=s.peepListRef[i].currentThirst.data.value)
-            s.PeepWindowsLabels[i][2].configure(text=s.peepListRef[i].currentFatigue.data.value)
-            s.PeepWindowsLabels[i][3].configure(text=s.peepListRef[i].currentSocial.data.value)
-            s.PeepWindowsLabels[i][4].configure(text=s.peepListRef[i].currentHygiene.data.value)
-            s.PeepWindowsLabels[i][5].configure(text=s.peepListRef[i].currentBladderLiquid.data.value)
-            s.PeepWindowsLabels[i][6].configure(text=s.peepListRef[i].currentBladderSolid.data.value)
-            s.PeepWindowsLabels[i][7].configure(text=s.peepListRef[i].currentFun.data.value)
-            s.PeepWindowsLabels[i][8].configure(text=s.peepListRef[i].currentFulfillment.data.value)
-            s.PeepWindowsLabels[i][9].configure(text=s.peepListRef[i].currentAction.data.name)
-            '''
+        # Other Char Frames
+        for i in range(1,  len(s.peepListRef)):
+            s.PeepWindows[i].configure(text=s.peepListRef[i].name)
             
             s.PeepWindowsProgressBars[i][0]['value'] = (70000 - s.peepListRef[i].currentHunger.data.value) / 700.0
             s.PeepWindowsProgressBars[i][1]['value'] = (70000 - s.peepListRef[i].currentThirst.data.value) / 700.0

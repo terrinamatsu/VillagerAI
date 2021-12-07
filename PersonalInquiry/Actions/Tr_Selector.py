@@ -18,6 +18,7 @@ class Tr_Selector(Tr_Tree):
     def Call(s):
         print(s.name)
         if s.isRunning:
+            print("Continuing")
             a = s.children[s.tempVal].Call()
         else:
             if s.children is not None:

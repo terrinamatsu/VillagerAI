@@ -31,7 +31,7 @@ class actionTree(object):
     def needTick(s, needNos):
         for i in range(0, len(needNos)-1):
             s.pBoard.needlist[needNos[i][0]].data.valueUp(-needNos[i][1])
-            print(s.pBoard.needlist[needNos[i][0]].data.value)
+            #print(s.pBoard.needlist[needNos[i][0]].data.value)
 
     def newTree(s, pBoard:peepBoard):
         from Actions.Tr_Sequence import Tr_Sequence
@@ -52,7 +52,7 @@ class actionTree(object):
                           Tr_Selector(lambda: s.rando(1), name="Bladder", children=[Tr_Leaf(s.pBoard, lambda: s.needTick([(5, 25000), (6, 1000)]), name="Go to toilet", ticks=2)]),
                           Tr_Selector(lambda: s.rando(1), name="Solids", children=[Tr_Leaf(s.pBoard, lambda: s.needTick([(5, 25000), (6, 25000)]), name="Go to toilet", ticks=6)]),
                           Tr_Selector(lambda: s.rando(1), name="Fun", children=[Tr_Leaf(s.pBoard, lambda: s.needTick([(7, 1000)]), name="Play a game", ticks=25)]),
-                          Tr_Selector(lambda: s.rando(1), name="Fulfillment", children=[Tr_Leaf(s.pBoard, lambda: s.needTick([(8, 1000)]), name="Fulfill yo self", ticks=45)])]
+                          Tr_Selector(lambda: s.rando(1), name="Fulfillment", children=[Tr_Leaf(s.pBoard, lambda: s.needTick([(8, 1200)]), name="Fulfill yo self", ticks=45)])]
 
         s.newActionTree = Tr_Sequence(name="Action Tree", children=s.newNeedsTree)
 

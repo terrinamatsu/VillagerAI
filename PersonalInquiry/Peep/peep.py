@@ -124,8 +124,6 @@ class Peep(WorldObject):
         self.peepBoard = peepBoard(Tr_Leaf(self, 1), needlist=self.needs)
         neee = self.acTree.newTree(self.peepBoard)
         self.newTree = self.acTree.newActionTree
-       
-       #self.randomise()
 
     ##RANDOMISER
     def randomise(self):
@@ -296,6 +294,9 @@ class Peep(WorldObject):
         elif self.peepBoard.needlist[8].data.value >= 80000:
             self.peepBoard.needlist[8].data.value = 80000
 
+        #########
+        # New Tree
+        #########
         self.newTree.Call()
         print(self.peepBoard.currentLeaf.name)
 
@@ -307,10 +308,11 @@ class Peep(WorldObject):
             for effect in self.currentAction.data.tickEffects:
                 effect[0].xpUp(effect[1])
                 
+        #########
         # Actions!!!
+        #########
         self.actionTree.SortChildren()
-
-        #print(self.actionTree.ToString())
+        """
         self.currentActionTicks -= 1
         if self.currentActionTicks <=0:
             if self.actionTree.children[0].data.aboveMin():
@@ -324,19 +326,24 @@ class Peep(WorldObject):
                         self.currentActionTicks = self.currentAction.data.secs
                         break
                     else:
-                        self.currentAction = self.acTree.inactionTree
+                        self.currentAction = self.acTree.inactionTree"""
 
+        #########
+        # Sleeping
+        #########
         if self.currentAction.data.name == "Go to sleep":
             self.isAsleep = True
-            print("EEE")
+            print(self.name + " Sleeping")
         else:
             self.isAsleep = False
-            print("AAA")
+            print(self.name + " Not Sleeping")
 
+        #########
         # Ageing
+        #########
         if(False):
             self.age += 1
         
         if(self.age % (28 * 4)) == 0:
-            print("Birthday time!")
+            print(self.name + " Birthday time!")
 

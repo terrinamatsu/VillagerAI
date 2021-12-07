@@ -16,7 +16,11 @@ class Tr_Sequence(Tr_Tree):
 
     def Call(s):
         if s.isRunning:
+            print("Continuing")
             a = s.children[s.nodeNo].Call()
+            if a == 1 or a == -1 : 
+                s.isRunning = False
+            return a
         else:
             while s.nodeNo < (len(s.children) - 1):
                 a = s.children[s.nodeNo].Call()
