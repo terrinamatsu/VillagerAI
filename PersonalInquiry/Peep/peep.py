@@ -329,7 +329,7 @@ class Peep(WorldObject):
                         self.currentAction = self.acTree.inactionTree"""
 
         #########
-        # Sleeping
+        # Print is Sleeping
         #########
         if self.currentAction.data.name == "Go to sleep":
             self.isAsleep = True
